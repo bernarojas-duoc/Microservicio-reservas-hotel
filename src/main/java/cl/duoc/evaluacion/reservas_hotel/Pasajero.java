@@ -1,5 +1,6 @@
 package cl.duoc.evaluacion.reservas_hotel;
 
+// Entidad secundaria que se inyecta dentro de la Reserva"
 public class Pasajero {
   private String rut;
   private String nombre;
