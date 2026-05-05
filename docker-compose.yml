@@ -1,0 +1,14 @@
+version: '1'
+services:
+  reservas-hotel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: reservas-hotel
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.datasource.url=jdbc:oracle:thin:@dlna4qpl3d91304g_high?TNS_ADMIN=/app/wallet/
+      - spring.datasource.username=BDY2201_S44
+      - spring.datasource.password=ActForm.S3_BDY
+    restart: always
