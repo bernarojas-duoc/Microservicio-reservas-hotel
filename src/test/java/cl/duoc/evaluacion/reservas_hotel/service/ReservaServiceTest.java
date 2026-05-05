@@ -186,6 +186,42 @@ class ReservaServiceTest {
     }
 
     @Test
+    void testCancelarReserva_NoExiste_LanzaExcepcion() {
+        when(reservaRepository.findById(99L)).thenReturn(Optional.empty());
+
+        RuntimeException ex = assertThrows(RuntimeException.class,
+                () -> reservaService.cancelarReserva(99L));
+
+        assertEquals("Reserva no encontrada", ex.getMessage());
+    }
+
+    @Test
+    void testEliminarReserva_NoExiste_LanzaExcepcion() {
+        when(reservaRepository.findById(99L)).thenReturn(Optional.empty());
+
+        RuntimeException ex = assertThrows(RuntimeException.class,
+                () -> reservaService.eliminarReserva(99L));
+
+        assertEquals("Reserva no encontrada", ex.getMessage());
+    }
+
+    @Test
+    void testUpdate_NoExiste_LanzaExcepcion() {
+        when(reservaRepository.findById(99L)).thenReturn(Optional.empty());
+
+        RuntimeException ex = assertThrows(RuntimeException.class,
+                () -> reservaService.update(99L, reserva));
+
+        assertEquals("Reserva no encontrada", ex.getMessage());
+    }
+
+    @Test
+    void testDelete_EliminaDirectamentePorId() {
+        reservaService.delete(1L);
+        verify(reservaRepository).deleteById(1L);
+    }
+
+    @Test
     void testUpdate_ActualizaCamposPermitidos() {
         reserva.setIdReserva(1L);
         Reserva detalles = new Reserva(null, null, null, 5, LocalDate.of(2026, 6, 1), null, 200000.0);
